@@ -1,0 +1,12 @@
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Hello from posts app!</h1>
+    {% for post in posts %}
+        <h3>{{post.title}}</h3>
+        <p>{{post.text}}</p>
+    {% endfor %}
+</body>
+</html>
