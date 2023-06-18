@@ -4,4 +4,3 @@
 .env
 ../venv/
  ../main.py
- tms/screens
