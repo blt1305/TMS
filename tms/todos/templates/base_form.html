@@ -12,23 +12,26 @@
 </head>
 <body>
     <aside>
-        <img src="{% static 'todos/img/svitok.jpg' %}" alt="Здесь должен быть логотип">
-        <span class = "logo">Список дел</span>
+        <img src="{% static 'todos/images/svitok.jpg' %}" class="image"/>
+        <span class = "logo"></span>
         <h3>Навигация</h3>
         <ul>
-            <a href=""><li><i class="fa-solid fa-house"></i>Главная</li></a>
-            <a href=""><li><i class="fa-solid fa-house"></i>Про нас</li></a>
+            <a href=""><li><i class="fa-solid fa-house"></i>Главная (Пока не работает)</li> </a>
+            <a href=""><li><i class="fa-solid fa-house"></i>Про нас (Пока не работает)</li></a>
         </ul>
     </aside>
-{% block mainmenu %}
-<ul>
-  {% for m in menu %}
-    <li> {{ m }} </li>
-  {% endfor %}
-</ul>
-{% endblock mainmenu %}
-
+    <main>
+        {% block mainmenu %}
+            <ul>
+                {% for m in menu %}
+                    <li> {{ m }} </li>
+                {% endfor %}
+            </ul>
+        {% endblock mainmenu %}
+    </main>
 {% block content %}
 {% endblock content %}
+<button>Create todo</button>
+
 </body>
 </html>
