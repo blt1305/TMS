@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h1>Hello from todos app!</h1>
+
+
+
+{% extends 'base_form.html' %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
     {% for todo in todos %}
-        <h3>{{todo.title}}</h3>
+
+        <h2>{{todo.title}}</h2>
         <p>{{todo.text}}</p>
+        <hr>
+
     {% endfor %}
-</body>
-</html>
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'todos/css/styles.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
+
+</head>
+<body>
+    <aside>
+        <img src="{% static 'todos/img/svitok.jpg' %}" alt="Здесь должен быть логотип">
+        <span class = "logo">Список дел</span>
+        <h3>Навигация</h3>
+        <ul>
+            <a href=""><li><i class="fa-solid fa-house"></i>Главная</li></a>
+            <a href=""><li><i class="fa-solid fa-house"></i>Про нас</li></a>
+        </ul>
+    </aside>
+{% block mainmenu %}
+<ul>
+  {% for m in menu %}
+    <li> {{ m }} </li>
+  {% endfor %}
+</ul>
+{% endblock mainmenu %}
+
+{% block content %}
+{% endblock content %}
+</body>
+</html>
