@@ -32,9 +32,15 @@ def home_todos(request):
         TODOS.append(todo)
         return JsonResponse({'todos': todo})
 
+
 def get_todo(request, todo_id):
+    global TODOS
     todo = next((todo for todo in TODOS if todo['todo_id'] == todo_id), None)
     if todo:
-        return JsonResponse({'todos': todo})
+        if request.method == 'GET':
+            return JsonResponse({'todos': todo})
+        elif request.method == 'DELETE':
+            TODOS = [todo for todo in TODOS if todo['todo_id'] != todo_id]
+            return HttpResponse(status=200)
     return HttpResponse(status=404)
 
