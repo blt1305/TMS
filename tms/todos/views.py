@@ -5,17 +5,20 @@ TODOS = [
     {
         'todo_id': 1,
         'title': 'todo 1',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block1'
     },
     {
         'todo_id': 2,
         'title': 'todo 2',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block2'
     },
     {
         'todo_id': 3,
         'title': 'todo 3',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block3'
     },
 ]
 def todos(request):

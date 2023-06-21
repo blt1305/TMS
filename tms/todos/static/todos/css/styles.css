@@ -1,10 +1,10 @@
 body {
-    background: #b0b7ce ;
+    background: #B4D8F4 ;
 }
 
 aside {
     float: left;
-    background: #a29e87	;
+    background: #99ADDE	;
     width: 20% ;
     padding: 2.5%;
     height: 100vh;
@@ -49,3 +49,36 @@ aside ul li:hover, aside ul a:hover {
 .image{
     width: 300px;
 }
+
+.block1 {
+    width: 400px;
+    background: #B0FFF6;
+    padding: 5px;
+    padding-right: 20px;
+    border: solid 1px black;
+    float: left;
+   }
+
+.block2 {
+    width: 400px;
+    background: #99D3DE;
+    padding: 5px;
+    padding-right: 20px;
+    position: relative;
+    top: 60px;
+    left: -10px;
+    border: solid 1px black;
+    float: left;
+   }
+
+.block3 {
+    width: 400px;
+    background: #A9ABF6;
+    padding: 5px;
+    padding-right: 20px;
+    position: relative;
+    top: 120px;
+    left: -20px;
+    border: solid 1px black;
+    float: left;
+   }

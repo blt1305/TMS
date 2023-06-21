@@ -5,13 +5,14 @@
 <h1>{{ title }}</h1>
 
 <h3><a href="https://pomodoro-tracker.com/?lang=ru">Техника Pomodoro</a></h3>
-    {% for todo in todos %}
 
-        <h3>{{todo.title}}</h3>
-        <p>{{todo.text}}</p>
-        <hr>
+{% for todo in todos %}
+<div class={{todo.block}}>
+    <h3>{{todo.title}}</h3>
+    <p>{{todo.text}}</p>
 
-    {% endfor %}
+</div>
+{% endfor %}
 
 
 {% endblock %}
