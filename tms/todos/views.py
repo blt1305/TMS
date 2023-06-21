@@ -1,6 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
+from .forms import *
+
 TODOS = [
     {
         'todo_id': 1,
@@ -46,4 +48,10 @@ def get_todo(request, todo_id):
             TODOS = [todo for todo in TODOS if todo['todo_id'] != todo_id]
             return HttpResponse(status=200)
     return HttpResponse(status=404)
+
+def add_task(request):
+    form = AddTaskForm()
+    return render(request, 'add_task.html', {'form': form, 'title': 'Добавление задачи'})
+
+
 
