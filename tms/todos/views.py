@@ -43,7 +43,7 @@ def get_todo(request, todo_id):
     todo = next((todo for todo in TODOS if todo['todo_id'] == todo_id), None)
     if todo:
         if request.method == 'GET':
-            return JsonResponse({'todos': todo})
+            return render(request, 'todo.html', {'title': 'Дело', 'todos': todo})
         elif request.method == 'DELETE':
             TODOS = [todo for todo in TODOS if todo['todo_id'] != todo_id]
             return HttpResponse(status=200)
