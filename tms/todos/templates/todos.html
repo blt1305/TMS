@@ -5,7 +5,7 @@
 <h1>{{ title }}</h1>
 
 <h3><a href="https://pomodoro-tracker.com/?lang=ru">Техника Pomodoro</a></h3>
-
+<script src="script.js"></script>
 {% for todo in todos %}
 <div class={{todo.block}}>
     <h3>{{todo.title}}</h3>
@@ -13,6 +13,6 @@
 
 </div>
 {% endfor %}
-<button class="button">Complete</button>
+<button id="button" class="button">Complete</button>
 
 {% endblock %}
