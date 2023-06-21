@@ -1,10 +1,10 @@
 body {
-    background: #b0b7ce ;
+    background: #B4D8F4 ;
 }
 
 aside {
     float: left;
-    background: #a29e87	;
+    background: #99ADDE	;
     width: 20% ;
     padding: 2.5%;
     height: 100vh;
@@ -48,4 +48,64 @@ aside ul li:hover, aside ul a:hover {
 
 .image{
     width: 300px;
+}
+
+.block1 {
+    width: 400px;
+    background: #B0FFF6;
+    padding: 5px;
+    padding-right: 20px;
+    border: solid 1px black;
+    border-radius: 12px;
+    float: left;
+   }
+
+.block2 {
+    width: 400px;
+    background: #99D3DE;
+    padding: 5px;
+    padding-right: 20px;
+    position: relative;
+    top: 60px;
+    left: -10px;
+    border: solid 1px black;
+    border-radius: 12px;
+    float: left;
+   }
+
+.block3 {
+    width: 400px;
+    background: #A9ABF6;
+    padding: 5px;
+    padding-right: 20px;
+    position: relative;
+    top: 120px;
+    left: -20px;
+    border: solid 1px black;
+    border-radius: 12px;
+    float: left;
+   }
+
+.button {
+    background-color: #008CBA;
+    border: solid 1px black;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 12px;
+
+}
+
+.button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

@@ -1,21 +1,26 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
+from .forms import *
+
 TODOS = [
     {
         'todo_id': 1,
         'title': 'todo 1',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block1'
     },
     {
         'todo_id': 2,
         'title': 'todo 2',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block2'
     },
     {
         'todo_id': 3,
         'title': 'todo 3',
-        'text': 'какое-то задание'
+        'text': 'какое-то задание',
+        'block': 'block3'
     },
 ]
 def todos(request):
@@ -38,9 +43,15 @@ def get_todo(request, todo_id):
     todo = next((todo for todo in TODOS if todo['todo_id'] == todo_id), None)
     if todo:
         if request.method == 'GET':
-            return JsonResponse({'todos': todo})
+            return render(request, 'todo.html', {'title': 'Дело', 'todos': todo})
         elif request.method == 'DELETE':
             TODOS = [todo for todo in TODOS if todo['todo_id'] != todo_id]
             return HttpResponse(status=200)
     return HttpResponse(status=404)
+
+def add_task(request):
+    form = AddTaskForm()
+    return render(request, 'add_task.html', {'form': form, 'title': 'Добавление задачи'})
+
+
 
