@@ -8,11 +8,16 @@
 <script src="script.js"></script>
 {% for todo in todos %}
 <div class={{todo.block}}>
-    <h3>{{todo.title}}</h3>
-    <p>{{todo.text}}</p>
-
+    <h4>{{todo.author}}</h4>
+    <p>{{todo.description}}</p>
 </div>
-{% endfor %}
 <button id="button" class="button">Complete</button>
-
+<h6>
+    "Кнопка нажималась "
+    <span id="counter"></span>
+    "раз(а)"
+</h6>
+<script></script>
+<hr>
+{% endfor %}
 {% endblock %}
