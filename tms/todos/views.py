@@ -24,7 +24,9 @@ TODOS = [
     },
 ]
 def todos(request):
-    return render(request, 'todos.html', {'title': 'Список дел', 'todos': TODOS})
+    todos = Todo.objects.all()
+    return render(request, 'todos.html', {'title': 'Список дел', 'todos': todos})
+
 
 def home_todos(request):
     if request.method == 'GET':
