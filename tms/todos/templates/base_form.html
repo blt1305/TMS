@@ -16,22 +16,28 @@
         <img src="{% static 'todos/images/svitok.jpg' %}" class="image"/>
         <h3>Навигация</h3>
         <ul>
-            <a href=""><li><i class="fa-solid fa-house"></i>Главная (Пока не работает)</li> </a>
-            <a href=""><li><i class="fa-solid fa-house"></i>Про нас (Пока не работает)</li></a>
+             {% for m in menu %}
+                {% if not forloop.last %}
+                    <li><i class="fa-solid fa-house"></i><a href={% url m.url_name %}>{{m.title}}</a>  </li>
+                {% else %}
+                    <li class = 'last'><i class="fa-solid fa-house"></i><a href={% url m.url_name %}>{{m.title}}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
     </aside>
+
     <main>
         {% block mainmenu %}
-            <ul>
-                {% for m in menu %}
-                    <li> {{ m }} </li>
-                {% endfor %}
-            </ul>
+            <div class="header">
+                <ul id="mainmenu" class="mainmenu">
+                <li class="logo"><a href="{% url 'todos' %}"><div class="logo"></div></a></li>
+                 </ul>
+            </div>
         {% endblock mainmenu %}
     </main>
+
 {% block content %}
 {% endblock content %}
-
 
 </body>
 </html>
