@@ -23,9 +23,23 @@ TODOS = [
         'block': 'block3'
     },
 ]
+
+menu = [
+    {'title':'Главная страница', 'url_name': 'todos'},
+    {'title':'О сайте', 'url_name': 'about'},
+    {'title':'Добавить задачу', 'url_name':'add_task'},
+    {'title':'Обратная связь', 'url_name':'contact'},
+    {'title':'Войти','url_name':'login'}
+]
+
+
 def todos(request):
     todos = Todo.objects.all()
-    return render(request, 'todos.html', {'title': 'Список дел', 'todos': todos})
+    context = {
+        'todos': todos,
+        'title': 'Главная страница',
+        'menu': menu}
+    return render(request, 'todos.html', context=context)
 
 
 def home_todos(request):
@@ -53,7 +67,24 @@ def get_todo(request, todo_id):
 
 def add_task(request):
     form = AddTaskForm()
-    return render(request, 'add_task.html', {'form': form, 'title': 'Добавление задачи'})
+    context = {
+        'form': form,
+        'title': 'Добавление задачи',
+        'menu': menu}
+    return render(request, 'add_task.html', context=context)
+
+
+def about(request):
+    return render (request, 'about.html', {'menu': menu, 'title': 'О сайте'})
+
+
+def contact(request):
+    return render (request, 'contact.html', {'menu': menu, 'title': 'Обратная связь'})
+
+
+def login(request):
+    return render(request, 'login.html', {'menu': menu, 'title': 'Войти'})
+
 
 
 
