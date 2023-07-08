@@ -23,6 +23,7 @@
                     <li class = 'last'><i class="fa-solid fa-house"></i><a href={% url m.url_name %}>{{m.title}}</a></li>
                 {% endif %}
             {% endfor %}
+            <a href="{% url 'create' %}"><li><button class="btn btn-info"><i class="fas fa-plus-circle"></i>Добавить задачу</button></li></a>
         </ul>
     </aside>
 

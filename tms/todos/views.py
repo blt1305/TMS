@@ -1,6 +1,5 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-
 from .forms import *
 
 TODOS = [
@@ -72,6 +71,9 @@ def add_task(request):
         'title': 'Добавление задачи',
         'menu': menu}
     return render(request, 'add_task.html', context=context)
+
+def create(request):
+    return render(request, 'create.html', {'menu': menu, 'title': 'Добавление задачи'})
 
 
 def about(request):

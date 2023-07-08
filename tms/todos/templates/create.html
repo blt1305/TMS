@@ -1,0 +1,20 @@
+{% extends 'base_form.html' %}
+
+{% block content %}
+
+    <h1>{{title}}</h1>
+<p>Добавление задачи </p>
+
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="Название задачи" class="form-control"><br>
+    <textarea placeholder="Содержание задачи" class="form-control"></textarea><br>
+    <input type="date" placeholder="Дата публикации" class="form-control"><br>
+    <button class="btn btn-info" type="submit"><i class="fas fa-plus-circle"></i>Добавить задачу </button><br>
+</form>
+
+
+{% endblock %}
+
+
