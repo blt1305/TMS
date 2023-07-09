@@ -73,7 +73,16 @@ def add_task(request):
     return render(request, 'add_task.html', context=context)
 
 def create(request):
-    return render(request, 'create.html', {'menu': menu, 'title': 'Добавление задачи'})
+    form = TodoForm()
+    # data = {
+    #     'form': form
+    # }
+
+    context = {
+        'form': form,
+        'title': 'Добавление задачи',
+        'menu': menu}
+    return render(request, 'create.html', context=context)
 
 
 def about(request):
