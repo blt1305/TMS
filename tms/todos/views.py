@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
 
 TODOS = [
@@ -73,15 +73,23 @@ def add_task(request):
     return render(request, 'add_task.html', context=context)
 
 def create(request):
+    error = ''
+    if request.method == 'POST':
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('todos')
+        else:
+            error = 'Неверные данные'
+
+
     form = TodoForm()
-    # data = {
-    #     'form': form
-    # }
 
     context = {
         'form': form,
         'title': 'Добавление задачи',
-        'menu': menu}
+        'menu': menu,
+        'error': error}
     return render(request, 'create.html', context=context)
 
 
