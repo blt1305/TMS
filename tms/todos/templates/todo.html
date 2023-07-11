@@ -2,17 +2,18 @@
 
 {% block content %}
 
-<h1>{{ todos.title }}</h1>
-<div class='block1'>
+    <h1>{{title}}</h1>
 
-    <p>{{todos.text}}</p>
-
+<div class={{todo.block1}}>
+<h3>{{one_todo.name }}</h3>
+<p>{{one_todo.created_date}}</p>
+<p>{{one_todo.description}}</p>
 </div>
 
 <div>
-
-    <button id="button" class="button">Complete</button>
     <p>
+    <script src="script.js"></script>
+    <button id="button" class="button">Complete</button>
     <h6>
         "Кнопка нажималась "
         <span id="counter"></span>

@@ -3,10 +3,10 @@ from .models import *
 from django.forms import ModelForm, TextInput, DateTimeInput, NullBooleanSelect, Textarea
 
 
-class AddTaskForm(forms.Form):
-    title = forms.CharField(max_length=255)
-    text = forms.CharField(max_length=255)
-    block = forms.CharField(max_length=255)
+# class AddTaskForm(forms.Form):
+#     title = forms.CharField(max_length=255)
+#     text = forms.CharField(max_length=255)
+#     block = forms.CharField(max_length=255)
 
 
 class TodoForm(ModelForm):
@@ -36,3 +36,4 @@ class TodoForm(ModelForm):
             'placeholder': 'Выполнено'
         })
     }
+

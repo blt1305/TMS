@@ -1,6 +1,7 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import *
+from django.views.generic import DetailView
 
 TODOS = [
     {
@@ -26,9 +27,8 @@ TODOS = [
 menu = [
     {'title':'Главная страница', 'url_name': 'todos'},
     {'title':'О сайте', 'url_name': 'about'},
-    {'title':'Добавить задачу', 'url_name':'add_task'},
     {'title':'Обратная связь', 'url_name':'contact'},
-    {'title':'Войти','url_name':'login'}
+    {'title':'Войти','url_name':'login'},
 ]
 
 
@@ -39,18 +39,6 @@ def todos(request):
         'title': 'Главная страница',
         'menu': menu}
     return render(request, 'todos.html', context=context)
-
-
-def home_todos(request):
-    if request.method == 'GET':
-        return JsonResponse({'todos': TODOS})
-    elif request.method == 'POST':
-        todo = dict(request.POST)
-        todo['todo_id'] = int(todo['todo_id'][0])
-        todo['title'] = todo['title'][0]
-        todo['text'] = todo['text'][0]
-        TODOS.append(todo)
-        return JsonResponse({'todos': todo})
 
 
 def get_todo(request, todo_id):
@@ -64,13 +52,12 @@ def get_todo(request, todo_id):
             return HttpResponse(status=200)
     return HttpResponse(status=404)
 
-def add_task(request):
-    form = AddTaskForm()
-    context = {
-        'form': form,
-        'title': 'Добавление задачи',
-        'menu': menu}
-    return render(request, 'add_task.html', context=context)
+class TodoDetailView(DetailView):
+    model = Todo
+    template_name = 'todo.html'
+    context_object_name = 'one_todo'
+
+
 
 def create(request):
     error = ''
@@ -80,11 +67,9 @@ def create(request):
             form.save()
             return redirect('todos')
         else:
-            error = 'Неверные данные'
-
+            error = 'Неверные данные, поля должны быть заполнены.'
 
     form = TodoForm()
-
     context = {
         'form': form,
         'title': 'Добавление задачи',
