@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import *
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 
 TODOS = [
     {
@@ -58,6 +58,13 @@ class TodoDetailView(DetailView):
     context_object_name = 'one_todo'
 
 
+class TodoUpdateView(UpdateView):
+    model = Todo
+    template_name = 'create.html'
+
+    form_class = TodoForm
+
+
 
 def create(request):
     error = ''
@@ -76,6 +83,9 @@ def create(request):
         'menu': menu,
         'error': error}
     return render(request, 'create.html', context=context)
+
+
+
 
 
 def about(request):

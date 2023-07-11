@@ -12,3 +12,10 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return f'/todo/{self.id}'
+
+    class Meta:
+        verbose_name = 'Задание'
+        verbose_name_plural = 'Задания'

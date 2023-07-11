@@ -8,8 +8,9 @@
 <h3>{{one_todo.name }}</h3>
 <p>{{one_todo.created_date}}</p>
 <p>{{one_todo.description}}</p>
+    <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-warning">Изменить задачу</a>
 </div>
-
+<hr>
 <div>
     <p>
     <script src="script.js"></script>
