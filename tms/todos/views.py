@@ -1,28 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import *
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, DeleteView
 
-TODOS = [
-    {
-        'todo_id': 1,
-        'title': 'todo 1',
-        'text': 'какое-то задание',
-        'block': 'block1'
-    },
-    {
-        'todo_id': 2,
-        'title': 'todo 2',
-        'text': 'какое-то задание',
-        'block': 'block2'
-    },
-    {
-        'todo_id': 3,
-        'title': 'todo 3',
-        'text': 'какое-то задание',
-        'block': 'block3'
-    },
-]
 
 menu = [
     {'title':'Главная страница', 'url_name': 'todos'},
@@ -41,17 +21,6 @@ def todos(request):
     return render(request, 'todos.html', context=context)
 
 
-def get_todo(request, todo_id):
-    global TODOS
-    todo = next((todo for todo in TODOS if todo['todo_id'] == todo_id), None)
-    if todo:
-        if request.method == 'GET':
-            return render(request, 'todo.html', {'title': 'Дело', 'todos': todo})
-        elif request.method == 'DELETE':
-            TODOS = [todo for todo in TODOS if todo['todo_id'] != todo_id]
-            return HttpResponse(status=200)
-    return HttpResponse(status=404)
-
 class TodoDetailView(DetailView):
     model = Todo
     template_name = 'todo.html'
@@ -64,6 +33,12 @@ class TodoUpdateView(UpdateView):
 
     form_class = TodoForm
 
+
+class TodoDeleteView(DeleteView):
+    model = Todo
+    success_url = '/'
+    template_name = 'todo_delete.html'
+    context_object_name = 'todo_delete'
 
 
 def create(request):
@@ -83,9 +58,6 @@ def create(request):
         'menu': menu,
         'error': error}
     return render(request, 'create.html', context=context)
-
-
-
 
 
 def about(request):

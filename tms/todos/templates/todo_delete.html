@@ -1,0 +1,24 @@
+{% extends 'base_form.html' %}
+
+{% block title %}Удаление задачи{% endblock %}
+
+{% block content %}
+<h1>Удаление задачи</h1>
+<div class={{todo.block1}}>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ todo_delete.name }}<br>
+        {{ todo_delete.description }}<br>
+        {{ todo_delete.created_date}}<br>
+        {{ todo_delete.author}}<br>
+        <button class="btn btn-danger" type="submit"><i class="fas fa-minus-circle"></i>Удалить задачу </button><br>
+    </form>
+</div>
+
+
+
+
+{% endblock %}
+
+
