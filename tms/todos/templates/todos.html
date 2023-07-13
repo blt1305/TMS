@@ -8,9 +8,10 @@
 <script src="script.js"></script>
 
 {% for todo in todos %}
-<div class={{todo.block}}>
+<div class={{todo.block1}}>
     <h4>{{todo.author}}</h4>
     <p>{{todo.description}}</p>
+    <a href="{% url 'one_todo' todo.id %}" class="btn btn-warning">Читать детальнее</a>
 </div>
 <script></script>
 <hr>
