@@ -7,11 +7,13 @@
     <h1>{{title}}</h1>
 
 <div class={{todo.block1}}>
-<h3>{{one_todo.name }}</h3>
+<!--<h3>{{one_todo.title }}</h3>-->
 <p>{{one_todo.created_date}}</p>
 <p>{{one_todo.description}}</p>
-    <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-warning">Изменить задачу</a>
-    <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger">Удалить задачу</a>
+    <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-primary btn-sm">Изменить задачу</a>
+    <br>
+    <br>
+    <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger btn-sm">Удалить задачу</a>
 </div>
 
 <hr>

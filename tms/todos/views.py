@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic.base import View
 
 
 menu = [
@@ -21,20 +22,22 @@ def todos(request):
     return render(request, 'todos.html', context=context)
 
 
-class TodoDetailView(DetailView):
-    model = Todo
-    template_name = 'todo.html'
-    context_object_name = 'one_todo'
+class TodoDetail(View):
+    '''отдельная запись'''
+    def get(self, request, id):
+        one_todo = Todo.objects.get(id=id)
+        return render(request, 'todo.html', {'one_todo': one_todo, 'title': one_todo.title, 'menu': menu})
 
 
 class TodoUpdateView(UpdateView):
+    '''обновление задачи'''
     model = Todo
     template_name = 'create.html'
-
     form_class = TodoForm
 
 
 class TodoDeleteView(DeleteView):
+    '''удаление задачи'''
     model = Todo
     success_url = '/'
     template_name = 'todo_delete.html'
@@ -42,6 +45,7 @@ class TodoDeleteView(DeleteView):
 
 
 def create(request):
+    '''добавление задачи'''
     error = ''
     if request.method == 'POST':
         form = TodoForm(request.POST)
