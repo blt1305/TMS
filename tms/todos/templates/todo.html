@@ -16,8 +16,50 @@
     <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger btn-sm">Удалить задачу</a>
 </div>
 
-<hr>
+</div>
 
+<div>
+    <div class="form-comment">
+        <form action="{% url 'add_comment' one_todo.id %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label><h5>Ваш комментарий:</h5></label>
+            <textarea name="comment_text"></textarea>
+            </div>
+
+            <div>
+                <label><h5>Ваше имя: *</h5></label>
+            <input type="text" name="name">
+            </div>
+
+            <div>
+                <label><h5>Ваш email: *</h5></label>
+            <input type="email" name="email_address">
+            </div>
+
+            <div>
+                <input type="submit">
+            </div>
+
+        </form>
+    </div>
+
+    <div>
+        {% for comment in one_todo.comment_set.all %}
+        <div class="view-comment">
+                <h5>{{ comment.name }}</h5>
+                <p class="fw-bold" >
+                <h5>{{ comment.comment_text }}</h5>
+                </p>
+            </div>
+        <hr>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<hr>
 <div>
     <p>
     <script src="script.js"></script>

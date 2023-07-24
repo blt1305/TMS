@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.base import View
+from .forms import CommentForm
 
 
 menu = [
@@ -27,6 +28,27 @@ class TodoDetail(View):
     def get(self, request, id):
         one_todo = Todo.objects.get(id=id)
         return render(request, 'todo.html', {'one_todo': one_todo, 'title': one_todo.title, 'menu': menu})
+
+
+class AddComment(View):
+    # def post(self, request, id):
+    #     form = CommentForm(request.POST)
+    #
+    #     if form.is_valid():
+    #         form = form.save(commit=False)
+    #         form.id = id
+    #         form.save()
+    #     return redirect('/')
+
+    def post(self, request, id):
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                form = form.save(commit=False)
+                form.comment_id = id
+                form.save()
+
+        return redirect(f'/todo/{id}')
 
 
 class TodoUpdateView(UpdateView):

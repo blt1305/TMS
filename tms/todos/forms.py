@@ -32,7 +32,7 @@ class TodoForm(ModelForm):
         }
 
 
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ('name', 'email_address', 'comment_text')
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email_address', 'comment_text')

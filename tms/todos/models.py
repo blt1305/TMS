@@ -23,16 +23,16 @@ class Todo(models.Model):
         verbose_name_plural = 'Задания'
 
 
-# class Comment(models.Model):
-#     '''комментарии под записью'''
-#     email_address = models.EmailField(default='')
-#     name = models.CharField(max_length=255, verbose_name='Имя пользователя')
-#     comment_text = models.TextField(max_length=2000, verbose_name='Текст комментария')
-#     comment = models.ForeignKey(Todo, on_delete=models.CASCADE, verbose_name='Задача')
-#
-#     def __str__(self):
-#         return self.name, self.comment
-#
-#     class Meta:
-#         verbose_name = 'Комментарий'
-#         verbose_name_plural  = 'Комментарии'
+class Comment(models.Model):
+    '''комментарий под записью'''
+    email_address = models.EmailField(default='')
+    name = models.CharField(max_length=50, verbose_name='Имя пользователя')
+    comment_text = models.TextField(max_length=2000, verbose_name='Текст комментария')
+    comment = models.ForeignKey(Todo, on_delete=models.CASCADE, verbose_name='Задача')
+
+    def __str__(self):
+        return self.name, self.comment
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural  = 'Комментарии'
