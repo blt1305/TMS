@@ -31,15 +31,6 @@ class TodoDetail(View):
 
 
 class AddComment(View):
-    # def post(self, request, id):
-    #     form = CommentForm(request.POST)
-    #
-    #     if form.is_valid():
-    #         form = form.save(commit=False)
-    #         form.id = id
-    #         form.save()
-    #     return redirect('/')
-
     def post(self, request, id):
         if request.method == 'POST':
             form = CommentForm(request.POST)
@@ -49,6 +40,41 @@ class AddComment(View):
                 form.save()
 
         return redirect(f'/todo/{id}')
+
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+class AddLike(View):
+    def get(self, request, id):
+        ip_client = get_client_ip(request)
+        try:
+            Likes.objects.get(ip = ip_client, post_id = id)
+            return redirect(f'/todo/{id}')
+        except:
+            new_like = Likes()
+            new_like.ip = ip_client
+            new_like.post_id = int(id)
+            new_like.save()
+            return redirect(f'/todo/{id}')
+
+
+class DelLike(View):
+    def get(self, request, id):
+        ip_client = get_client_ip(request)
+        try:
+            lik = Likes.objects.get(ip = ip_client)
+            lik.delete()
+            return redirect(f'/todo/{id}')
+        except:
+            return redirect(f'/todo/{id}')
 
 
 class TodoUpdateView(UpdateView):

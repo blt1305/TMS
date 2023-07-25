@@ -7,7 +7,6 @@
     <h1>{{title}}</h1>
 
 <div class={{todo.block1}}>
-<!--<h3>{{one_todo.title }}</h3>-->
 <p>{{one_todo.created_date}}</p>
 <p>{{one_todo.description}}</p>
     <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-primary btn-sm">Изменить задачу</a>
@@ -16,10 +15,17 @@
     <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger btn-sm">Удалить задачу</a>
 </div>
 
-</div>
-
 <div>
-    <div class="form-comment">
+    <br>
+    <p>Понравилось: {{ one_todo.likes_set.all.count }}</p>
+    <br>
+    <a href="{% url 'add_likes' one_todo.id %}" class="btn btn-outline-primary">Нравится </a>
+    <a href="{% url 'del_likes' one_todo.id %}" class="btn btn-outline-danger">Не нравится</a>
+</div>
+<br>
+
+<div class="form-comment">
+    <div>
         <form action="{% url 'add_comment' one_todo.id %}" method="post">
             {% csrf_token %}
             <div>
