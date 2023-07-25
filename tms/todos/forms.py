@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from django.forms import ModelForm, TextInput, DateTimeInput, NullBooleanSelect, Textarea
+from django.forms import ModelForm, TextInput, DateTimeInput, NullBooleanSelect, Textarea, EmailInput
 
 
 class TodoForm(ModelForm):

@@ -44,6 +44,7 @@ class AddComment(View):
 
 
 def get_client_ip(request):
+    '''получаем ip-адрес клиента'''
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
@@ -53,6 +54,7 @@ def get_client_ip(request):
 
 
 class AddLike(View):
+    '''добавление лайков'''
     def get(self, request, id):
         ip_client = get_client_ip(request)
         try:
@@ -67,6 +69,7 @@ class AddLike(View):
 
 
 class DelLike(View):
+    '''удаление лайков'''
     def get(self, request, id):
         ip_client = get_client_ip(request)
         try:

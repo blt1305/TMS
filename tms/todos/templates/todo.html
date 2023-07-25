@@ -10,8 +10,6 @@
 <p>{{one_todo.created_date}}</p>
 <p>{{one_todo.description}}</p>
     <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-primary btn-sm">Изменить задачу</a>
-    <br>
-    <br>
     <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger btn-sm">Удалить задачу</a>
 </div>
 
@@ -22,15 +20,16 @@
     <a href="{% url 'add_likes' one_todo.id %}" class="btn btn-outline-primary">Нравится </a>
     <a href="{% url 'del_likes' one_todo.id %}" class="btn btn-outline-danger">Не нравится</a>
 </div>
-<br>
 
 <div class="form-comment">
-    <div>
-        <form action="{% url 'add_comment' one_todo.id %}" method="post">
+   <div>
+       <form action="{% url 'add_comment' one_todo.id %}" method="post">
             {% csrf_token %}
             <div>
+
                 <label><h5>Ваш комментарий:</h5></label>
             <textarea name="comment_text"></textarea>
+
             </div>
 
             <div>
@@ -51,6 +50,8 @@
     </div>
 
     <div>
+
+         <label><h5>Комментарии:</h5></label>
         {% for comment in one_todo.comment_set.all %}
         <div class="view-comment">
                 <h5>{{ comment.name }}</h5>
