@@ -6,20 +6,11 @@ from django.views.generic.base import View
 from .forms import CommentForm
 
 
-menu = [
-    {'title':'Главная страница', 'url_name': 'todos'},
-    {'title':'О сайте', 'url_name': 'about'},
-    {'title':'Обратная связь', 'url_name':'contact'},
-    {'title':'Войти','url_name':'login'},
-]
-
-
 def todos(request):
     todos = Todo.objects.all()
     context = {
         'todos': todos,
-        'title': 'Главная страница',
-        'menu': menu}
+        'title': 'Главная страница'}
     return render(request, 'todos.html', context=context)
 
 
@@ -27,7 +18,7 @@ class TodoDetail(View):
     '''отдельная запись'''
     def get(self, request, id):
         one_todo = Todo.objects.get(id=id)
-        return render(request, 'todo.html', {'one_todo': one_todo, 'title': one_todo.title, 'menu': menu})
+        return render(request, 'todo.html', {'one_todo': one_todo, 'title': one_todo.title})
 
 
 class AddComment(View):
@@ -73,7 +64,7 @@ class DelLike(View):
     def get(self, request, id):
         ip_client = get_client_ip(request)
         try:
-            lik = Likes.objects.get(ip = ip_client)
+            lik = Likes.objects.get(ip = ip_client, post_id = id)
             lik.delete()
             return redirect(f'/todo/{id}')
         except:
@@ -110,21 +101,20 @@ def create(request):
     context = {
         'form': form,
         'title': 'Добавление задачи',
-        'menu': menu,
         'error': error}
     return render(request, 'create.html', context=context)
 
 
 def about(request):
-    return render (request, 'about.html', {'menu': menu, 'title': 'О сайте'})
+    return render (request, 'about.html', { 'title': 'О сайте'})
 
 
 def contact(request):
-    return render (request, 'contact.html', {'menu': menu, 'title': 'Обратная связь'})
+    return render (request, 'contact.html', { 'title': 'Обратная связь'})
 
 
 def login(request):
-    return render(request, 'login.html', {'menu': menu, 'title': 'Войти'})
+    return render(request, 'login.html', { 'title': 'Войти'})
 
 
 

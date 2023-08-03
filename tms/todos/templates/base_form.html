@@ -1,4 +1,6 @@
 {% load static %}
+{% load todos_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +17,8 @@
     <aside>
         <img src="{% static 'todos/images/svitok.jpg' %}" class="image"/>
         <h3>Навигация</h3>
+
+        {% get_menu as menu %}
         <ul>
              {% for m in menu %}
                 {% if not forloop.last %}
@@ -28,6 +32,7 @@
     </aside>
 
     <main>
+
         {% block mainmenu %}
             <div class="header">
                 <ul id="mainmenu" class="mainmenu">
