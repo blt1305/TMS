@@ -1,4 +1,3 @@
-from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
@@ -29,7 +28,6 @@ class AddComment(View):
                 form = form.save(commit=False)
                 form.comment_id = id
                 form.save()
-
         return redirect(f'/todo/{id}')
 
 
@@ -64,8 +62,7 @@ class DelLike(View):
     def get(self, request, id):
         ip_client = get_client_ip(request)
         try:
-            lik = Likes.objects.get(ip = ip_client, post_id = id)
-            lik.delete()
+            Likes.objects.get(ip = ip_client, post_id = id).delete()
             return redirect(f'/todo/{id}')
         except:
             return redirect(f'/todo/{id}')
