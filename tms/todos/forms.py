@@ -1,21 +1,15 @@
 from django import forms
 from .models import *
-from django.forms import ModelForm, TextInput, DateTimeInput, NullBooleanSelect, Textarea
-
-
-# class AddTaskForm(forms.Form):
-#     title = forms.CharField(max_length=255)
-#     text = forms.CharField(max_length=255)
-#     block = forms.CharField(max_length=255)
+from django.forms import ModelForm, TextInput, DateTimeInput, NullBooleanSelect, Textarea, EmailInput
 
 
 class TodoForm(ModelForm):
     class Meta:
         model = Todo
-        fields = ['name', 'description', 'created_date', 'author', 'completed']
+        fields = ['title', 'description', 'created_date', 'author', 'completed']
 
         widgets = {
-            "name": TextInput(attrs={
+            "title": TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Название задачи'
             }),
@@ -37,3 +31,8 @@ class TodoForm(ModelForm):
             })
         }
 
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email_address', 'comment_text')

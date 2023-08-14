@@ -7,15 +7,66 @@
     <h1>{{title}}</h1>
 
 <div class={{todo.block1}}>
-<h3>{{one_todo.name }}</h3>
 <p>{{one_todo.created_date}}</p>
 <p>{{one_todo.description}}</p>
-    <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-warning">Изменить задачу</a>
-    <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger">Удалить задачу</a>
+    <a href="{% url 'todo_update' one_todo.id %}" class="btn btn-primary btn-sm">Изменить задачу</a>
+    <a href="{% url 'todo_delete' one_todo.id %}" class="btn btn-danger btn-sm">Удалить задачу</a>
+</div>
+
+<div>
+    <br>
+    <p>Понравилось: {{ one_todo.likes_set.all.count }}</p>
+    <br>
+    <a href="{% url 'add_likes' one_todo.id %}" class="btn btn-outline-primary">Нравится </a>
+    <a href="{% url 'del_likes' one_todo.id %}" class="btn btn-outline-danger">Не нравится</a>
+</div>
+
+<div class="form-comment">
+   <div>
+       <form action="{% url 'add_comment' one_todo.id %}" method="post">
+            {% csrf_token %}
+            <div>
+
+                <label><h5>Ваш комментарий:</h5></label>
+            <textarea name="comment_text"></textarea>
+
+            </div>
+
+            <div>
+                <label><h5>Ваше имя: *</h5></label>
+            <input type="text" name="name">
+            </div>
+
+            <div>
+                <label><h5>Ваш email: *</h5></label>
+            <input type="email" name="email_address">
+            </div>
+
+            <div>
+                <input type="submit">
+            </div>
+
+        </form>
+    </div>
+
+    <div>
+
+         <label><h5>Комментарии:</h5></label>
+        {% for comment in one_todo.comment_set.all %}
+        <div class="view-comment">
+                <h5>{{ comment.name }}</h5>
+                <p class="fw-bold" >
+                <h5>{{ comment.comment_text }}</h5>
+                </p>
+            </div>
+        <hr>
+        {% endfor %}
+    </div>
+
+
 </div>
 
 <hr>
-
 <div>
     <p>
     <script src="script.js"></script>

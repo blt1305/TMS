@@ -51,7 +51,7 @@ aside ul li:hover, aside ul a:hover {
 }
 
 .block1 {
-    width: 400px;
+    width: 00px;
     background: #B0FFF6;
     padding: 5px;
     padding-right: 20px;
@@ -88,4 +88,30 @@ form {
     margin-left: 32%;
     width: 500px;
     margin-top: 50px;
+}
+
+.form-comment{
+    font-size: 18px;
+
+}
+
+.form-comment label{
+    margin: 5px 5px;
+}
+
+.form-comment input{
+    border-radius: 5px;
+}
+
+.form-comment textarea{
+    border-radius: 5px;
+     width: 100%;
+     margin-left: -0%;
+     resize: vertical;
+}
+
+.view-comment{
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 5px;
 }
