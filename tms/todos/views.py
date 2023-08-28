@@ -7,8 +7,9 @@ from django.views.generic.base import View
 from .forms import CommentForm
 from rest_framework import viewsets, permissions, filters
 from .serializers import TodoSerializer
-# from models import Todo
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.forms import model_to_dict
 
 def todos(request):
     todos = Todo.objects.all()
@@ -120,11 +121,25 @@ def login(request):
 
 #_______________________________________________________#
 
-class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-    permission_classes = [permissions.AllowAny]
-    filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
-    ordering_fields = ['id', 'title', 'description', 'created_date']
-    filterset_fields = ['id', 'title', 'description', 'author']
-    search_fields = ['title', 'description']
+# class TodoViewSet(viewsets.ModelViewSet):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#     permission_classes = [permissions.AllowAny]
+#     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
+#     ordering_fields = ['id', 'title', 'description', 'created_date']
+#     filterset_fields = ['id', 'title', 'description', 'author']
+#     search_fields = ['title', 'description']
+
+class TodoAPIView(APIView):
+    def get(self, request):
+        lst = Todo.objects.all().values()
+        return Response({'todos': list(lst)})         #получаем js, м-д GET
+
+    def post(self, request):
+        todo_new = Todo.objects.create(
+            title = request.data['title'],
+            description = request.data['description'],
+            author_id = request.data['author_id'],
+
+        )
+        return Response({'todo': model_to_dict(todo_new)})        #метод POST, создание записи

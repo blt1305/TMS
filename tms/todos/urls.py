@@ -3,10 +3,11 @@ from django.urls import path, include
 
 #_______________________#
 from rest_framework import routers
-from .views import TodoViewSet
+# from .views import TodoViewSet, TodoAPIView
+from .views import  TodoAPIView
 
-router = routers.DefaultRouter()
-router.register(r'todo', TodoViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'todo', TodoViewSet)
 #________________#
 
 urlpatterns = [
@@ -21,8 +22,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
-    path('api/v2/', include(router.urls)),
-
+    # path('api/v2/', include(router.urls)),
+    path('api/v2/todolist/', TodoAPIView.as_view())
 ]
 
 
