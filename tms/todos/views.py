@@ -1,8 +1,13 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
 from django.shortcuts import render, redirect
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.base import View
 from .forms import CommentForm
+from rest_framework import viewsets, permissions, filters
+from .serializers import TodoSerializer
+# from models import Todo
 
 
 def todos(request):
@@ -113,6 +118,13 @@ def contact(request):
 def login(request):
     return render(request, 'login.html', { 'title': 'Войти'})
 
+#_______________________________________________________#
 
-
-
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
+    ordering_fields = ['id', 'title', 'description', 'created_date']
+    filterset_fields = ['id', 'title', 'description', 'author']
+    search_fields = ['title', 'description']

@@ -1,5 +1,13 @@
 from . import views
-from django.urls import path
+from django.urls import path, include
+
+#_______________________#
+from rest_framework import routers
+from .views import TodoViewSet
+
+router = routers.DefaultRouter()
+router.register(r'todo', TodoViewSet)
+#________________#
 
 urlpatterns = [
     path('', views.todos, name="todos"),
@@ -13,6 +21,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
+    path('api/v2/', include(router.urls)),
+
 ]
 
 
