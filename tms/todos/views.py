@@ -132,14 +132,17 @@ def login(request):
 
 class TodoAPIView(APIView):
     def get(self, request):
-        lst = Todo.objects.all().values()
-        return Response({'todos': list(lst)})         #получаем js, м-д GET
+        td= Todo.objects.all()
+        return Response({'todos': TodoSerializer(td, many=True).data})         #получаем js, м-д GET
 
     def post(self, request):
+        serializer = TodoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         todo_new = Todo.objects.create(
             title = request.data['title'],
             description = request.data['description'],
             author_id = request.data['author_id'],
 
         )
-        return Response({'todo': model_to_dict(todo_new)})        #метод POST, создание записи
+        return Response({'todo': TodoSerializer(todo_new).data})        #метод POST, создание записи
