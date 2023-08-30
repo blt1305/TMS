@@ -23,7 +23,9 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
     # path('api/v2/', include(router.urls)),
-    path('api/v2/todolist/', TodoAPIView.as_view())
+    path('api/v2/todolist/', TodoAPIView.as_view()),
+    path('api/v2/todolist/<int:pk>/', TodoAPIView.as_view()),
+
 ]
 
 

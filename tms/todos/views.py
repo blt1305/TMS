@@ -135,14 +135,38 @@ class TodoAPIView(APIView):
         td= Todo.objects.all()
         return Response({'todos': TodoSerializer(td, many=True).data})         #получаем js, м-д GET
 
-    def post(self, request):
+    def post(self, request):                                                    #метод POST, создание записи
         serializer = TodoSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-        todo_new = Todo.objects.create(
-            title = request.data['title'],
-            description = request.data['description'],
-            author_id = request.data['author_id'],
+        return Response({'todo': serializer.data})
 
-        )
-        return Response({'todo': TodoSerializer(todo_new).data})        #метод POST, создание записи
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+        if  not pk:
+            return Response({'error':'Метод PUT не определен'})
+
+        try:
+            instance = Todo.objects.get(pk = pk)
+        except:
+            return Response({'error':'Метод PUT не определен'})
+
+        serializer = TodoSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'todo': serializer.data})
+
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+        if  not pk:
+            return Response({'error':'Метод DELETE не определен'})
+
+        try:
+            instance = Todo.objects.get(pk = pk)
+            instance.delete()
+        except:
+            return Response({'error':'Метод PUT не определен'})
+
+        return Response({'todo': 'delete todo' + str(pk)})

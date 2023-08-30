@@ -18,6 +18,19 @@ class TodoSerializer(serializers.Serializer):
     author_id = serializers.IntegerField()
     completed = serializers.BooleanField(default=False)
 
+    def create(self, validated_data):
+        return Todo.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.created_date = validated_data.get('created_date', instance.created_date)
+        instance.author_id = validated_data.get('author_id', instance.author_id)
+        instance.completed = validated_data.get('completed', instance.completed)
+        instance.save()
+        return instance
+
 # def encode():
 #     model = TodoModel('домашняя работа', 'уборка')
 #     model_sr = TodoSerializer(model)
