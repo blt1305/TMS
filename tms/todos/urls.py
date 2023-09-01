@@ -1,10 +1,11 @@
 from . import views
 from django.urls import path, include
+from .views import *
 
 #_______________________#
-from rest_framework import routers
+# from rest_framework import routers
 # from .views import TodoViewSet, TodoAPIView
-from .views import  TodoAPIView
+# from .views import  TodoAPIView
 
 # router = routers.DefaultRouter()
 # router.register(r'todo', TodoViewSet)
@@ -23,9 +24,9 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
     # path('api/v2/', include(router.urls)),
-    path('api/v2/todolist/', TodoAPIView.as_view()),
-    path('api/v2/todolist/<int:pk>/', TodoAPIView.as_view()),
-
+    path('api/v2/todolist/', TodoAPIList.as_view()),
+    path('api/v2/todolist/<int:pk>/', TodoAPIUpdate.as_view()),
+    path('api/v2/tododetail/<int:pk>/', TodoAPIDetailView.as_view()),
 ]
 
 
