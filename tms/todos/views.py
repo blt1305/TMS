@@ -123,13 +123,21 @@ def login(request):
 #_______________________________________________________#
 
 class TodoViewSet(viewsets.ModelViewSet):
-    queryset = Todo.objects.all()
+    # queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 #     permission_classes = [permissions.AllowAny]
 #     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
 #     ordering_fields = ['id', 'title', 'description', 'created_date']
 #     filterset_fields = ['id', 'title', 'description', 'author']
 #     search_fields = ['title', 'description']
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+
+        if not pk:
+            return Todo.objects.all()[1:5]
+
+        return Todo.objects.filter(pk = pk)
 
     @action(methods=['get'], detail=True)
     def comments(self, request, pk = None):

@@ -11,7 +11,7 @@ from rest_framework import routers
 # router.register(r'todo', TodoViewSet)
 
 router = routers.DefaultRouter()
-router.register(r'todo', TodoViewSet)
+router.register(r'todo', TodoViewSet, basename='todo')
 print(router.urls)
 #________________#
 
