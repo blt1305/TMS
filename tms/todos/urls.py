@@ -1,5 +1,18 @@
 from . import views
-from django.urls import path
+from django.urls import path, include
+from .views import *
+
+#_______________________#
+from rest_framework import routers
+# from .views import TodoViewSet, TodoAPIView
+# from .views import  TodoAPIView
+
+# router = routers.DefaultRouter()
+# router.register(r'todo', TodoViewSet)
+
+router = routers.DefaultRouter()
+router.register(r'todo', TodoViewSet)
+#________________#
 
 urlpatterns = [
     path('', views.todos, name="todos"),
@@ -13,6 +26,9 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
+    path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
+    # path('api/v2/todolist/', TodoViewSet.as_view({'get': 'list'})),
+    # path('api/v2/todolist/<int:pk>/', TodoViewSet.as_view({'put': 'update'})),
 ]
 
 

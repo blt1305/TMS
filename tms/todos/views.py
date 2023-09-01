@@ -1,9 +1,15 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
 from django.shortcuts import render, redirect
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.base import View
 from .forms import CommentForm
-
+from rest_framework import generics, viewsets
+from .serializers import TodoSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.forms import model_to_dict
 
 def todos(request):
     todos = Todo.objects.all()
@@ -113,6 +119,28 @@ def contact(request):
 def login(request):
     return render(request, 'login.html', { 'title': 'Войти'})
 
+#_______________________________________________________#
 
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+#     permission_classes = [permissions.AllowAny]
+#     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
+#     ordering_fields = ['id', 'title', 'description', 'created_date']
+#     filterset_fields = ['id', 'title', 'description', 'author']
+#     search_fields = ['title', 'description']
 
+# class TodoAPIList(generics.ListCreateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#
+#
+# class TodoAPIUpdate(generics.UpdateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#
+#
+# class TodoAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
 
