@@ -10,6 +10,7 @@ from .serializers import TodoSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.forms import model_to_dict
+from rest_framework.decorators import action
 
 def todos(request):
     todos = Todo.objects.all()
@@ -129,6 +130,11 @@ class TodoViewSet(viewsets.ModelViewSet):
 #     ordering_fields = ['id', 'title', 'description', 'created_date']
 #     filterset_fields = ['id', 'title', 'description', 'author']
 #     search_fields = ['title', 'description']
+
+    @action(methods=['get'], detail=True)
+    def comments(self, request, pk = None):
+        cmts = Comment.objects.get(pk = pk)
+        return Response({'cmts': cmts.comment_text})
 
 # class TodoAPIList(generics.ListCreateAPIView):
 #     queryset = Todo.objects.all()
