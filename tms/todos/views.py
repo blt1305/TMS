@@ -5,7 +5,7 @@ from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.base import View
 from .forms import CommentForm
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .serializers import TodoSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -121,66 +121,26 @@ def login(request):
 
 #_______________________________________________________#
 
-# class TodoViewSet(viewsets.ModelViewSet):
-#     queryset = Todo.objects.all()
-#     serializer_class = TodoSerializer
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
 #     permission_classes = [permissions.AllowAny]
 #     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
 #     ordering_fields = ['id', 'title', 'description', 'created_date']
 #     filterset_fields = ['id', 'title', 'description', 'author']
 #     search_fields = ['title', 'description']
 
-class TodoAPIList(generics.ListCreateAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
+# class TodoAPIList(generics.ListCreateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#
+#
+# class TodoAPIUpdate(generics.UpdateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#
+#
+# class TodoAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
 
-
-class TodoAPIUpdate(generics.UpdateAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-
-
-class TodoAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-
-# class TodoAPIView(APIView):
-#     def get(self, request):
-#         td= Todo.objects.all()
-#         return Response({'todos': TodoSerializer(td, many=True).data})         #получаем js, м-д GET
-#
-#     def post(self, request):                                                    #метод POST, создание записи
-#         serializer = TodoSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#
-#         return Response({'todo': serializer.data})
-#
-#     def put(self, request, *args, **kwargs):
-#         pk = kwargs.get('pk', None)
-#         if  not pk:
-#             return Response({'error':'Метод PUT не определен'})
-#
-#         try:
-#             instance = Todo.objects.get(pk = pk)
-#         except:
-#             return Response({'error':'Метод PUT не определен'})
-#
-#         serializer = TodoSerializer(data=request.data, instance=instance)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response({'todo': serializer.data})
-#
-#
-#     def delete(self, request, *args, **kwargs):
-#         pk = kwargs.get('pk', None)
-#         if  not pk:
-#             return Response({'error':'Метод DELETE не определен'})
-#
-#         try:
-#             instance = Todo.objects.get(pk = pk)
-#             instance.delete()
-#         except:
-#             return Response({'error':'Метод PUT не определен'})
-#
-#         return Response({'todo': 'delete todo' + str(pk)})
