@@ -9,9 +9,8 @@ class Todo(models.Model):
     title = models.CharField(max_length=120, default='')
     description = models.TextField(default='')
     created_date = models.DateField(default=date.today)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
-
     def __str__(self):
         return self.title
 

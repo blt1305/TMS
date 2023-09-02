@@ -10,9 +10,9 @@ from rest_framework import routers
 # router = routers.DefaultRouter()
 # router.register(r'todo', TodoViewSet)
 
-router = routers.DefaultRouter()
-router.register(r'todo', TodoViewSet, basename='todo')
-print(router.urls)
+# router = routers.DefaultRouter()
+# router.register(r'todo', TodoViewSet, basename='todo')
+# print(router.urls)
 #________________#
 
 urlpatterns = [
@@ -27,9 +27,11 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
-    path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
-    # path('api/v2/todolist/', TodoViewSet.as_view({'get': 'list'})),
-    # path('api/v2/todolist/<int:pk>/', TodoViewSet.as_view({'put': 'update'})),
+    # path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
+    path('api/v2/todo/', TodoAPIList.as_view()),
+    path('api/v2/todo/<int:pk>/', TodoAPIUpdate.as_view()),
+    path('api/v2/tododelete/<int:pk>/', TodoAPIDestroy.as_view()),
+
 ]
 
 
