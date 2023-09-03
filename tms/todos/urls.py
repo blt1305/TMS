@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/v2/todo/', TodoAPIList.as_view()),
     path('api/v2/todo/<int:pk>/', TodoAPIUpdate.as_view()),
     path('api/v2/tododelete/<int:pk>/', TodoAPIDestroy.as_view()),
+    path('api/v2/drf-auth/', include('rest_framework.urls')),
 
 ]
 
