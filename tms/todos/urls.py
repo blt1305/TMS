@@ -1,5 +1,5 @@
 from . import views
-from django.urls import path, include
+from django.urls import path, include, re_path
 from .views import *
 
 #_______________________#
@@ -32,7 +32,8 @@ urlpatterns = [
     path('api/v2/todo/<int:pk>/', TodoAPIUpdate.as_view()),
     path('api/v2/tododelete/<int:pk>/', TodoAPIDestroy.as_view()),
     path('api/v2/drf-auth/', include('rest_framework.urls')),
-
+    path('api/v2/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]
 
 
