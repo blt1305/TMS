@@ -1,18 +1,12 @@
 from . import views
-from django.urls import path, include, re_path
-from .views import *
+from django.urls import path, include
 
 #_______________________#
 from rest_framework import routers
-# from .views import TodoViewSet, TodoAPIView
-# from .views import  TodoAPIView
+from .views import TodoViewSet
 
-# router = routers.DefaultRouter()
-# router.register(r'todo', TodoViewSet)
-
-# router = routers.DefaultRouter()
-# router.register(r'todo', TodoViewSet, basename='todo')
-# print(router.urls)
+router = routers.DefaultRouter()
+router.register(r'todo', TodoViewSet)
 #________________#
 
 urlpatterns = [
@@ -27,13 +21,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
-    # path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
-    path('api/v2/todo/', TodoAPIList.as_view()),
-    path('api/v2/todo/<int:pk>/', TodoAPIUpdate.as_view()),
-    path('api/v2/tododelete/<int:pk>/', TodoAPIDestroy.as_view()),
-    path('api/v2/drf-auth/', include('rest_framework.urls')),
-    path('api/v2/auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
+
 ]
 
 

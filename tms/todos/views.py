@@ -5,15 +5,9 @@ from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.base import View
 from .forms import CommentForm
-from rest_framework import generics, viewsets
-
-from .permissions import IsAdminReadOnly, IsOwnerOrReadOnly
+from rest_framework import generics, viewsets, permissions, filters
 from .serializers import TodoSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.forms import model_to_dict
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
+from .permissions import IsAdminReadOnly, IsOwnerOrReadOnly
 
 
 def todos(request):
@@ -126,14 +120,14 @@ def login(request):
 
 #_______________________________________________________#
 
-# class TodoViewSet(viewsets.ModelViewSet):
-#     # queryset = Todo.objects.all()
-#     serializer_class = TodoSerializer
-# #     permission_classes = [permissions.AllowAny]
-# #     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
-# #     ordering_fields = ['id', 'title', 'description', 'created_date']
-# #     filterset_fields = ['id', 'title', 'description', 'author']
-# #     search_fields = ['title', 'description']
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
+    ordering_fields = ['id', 'title', 'description', 'created_date']
+    filterset_fields = ['id', 'title', 'description', 'author']
+    search_fields = ['title', 'description']
 #
 #     def get_queryset(self):
 #         pk = self.kwargs.get('pk')
@@ -148,24 +142,24 @@ def login(request):
 #         cmts = Comment.objects.get(pk = pk)
 #         return Response({'cmts': cmts.comment_text})
 
-class TodoAPIList(generics.ListCreateAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+# class TodoAPIList(generics.ListCreateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
-class TodoAPIUpdate(generics.UpdateAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-    permission_classes = (IsAuthenticated, )
+# class TodoAPIUpdate(generics.UpdateAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#     permission_classes = (IsAuthenticated, )
 
 
 # class TodoAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Todo.objects.all()
 #     serializer_class = TodoSerializer
 
-class TodoAPIDestroy(generics.RetrieveDestroyAPIView):
-    queryset = Todo.objects.all()
-    serializer_class = TodoSerializer
-    permission_classes = (IsAdminReadOnly,)
-
+# class TodoAPIDestroy(generics.RetrieveDestroyAPIView):
+#     queryset = Todo.objects.all()
+#     serializer_class = TodoSerializer
+#     permission_classes = (IsAdminReadOnly,)
+#
