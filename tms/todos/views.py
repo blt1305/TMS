@@ -123,7 +123,7 @@ def login(request):
 class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend, filters.SearchFilter]
     ordering_fields = ['id', 'title', 'description', 'created_date']
     filterset_fields = ['id', 'title', 'description', 'author']
