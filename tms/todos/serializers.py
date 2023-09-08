@@ -4,6 +4,7 @@ from rest_framework import serializers
 
 
 class TodoSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Todo
-        fields = ['id', 'title', 'description', 'created_date', 'author']
+        fields = '__all__'

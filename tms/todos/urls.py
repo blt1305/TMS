@@ -1,14 +1,10 @@
 from . import views
 from django.urls import path, include
-from .views import *
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 #_______________________#
 from rest_framework import routers
-# from .views import TodoViewSet, TodoAPIView
-# from .views import  TodoAPIView
-
-# router = routers.DefaultRouter()
-# router.register(r'todo', TodoViewSet)
+from .views import TodoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'todo', TodoViewSet)
@@ -27,8 +23,10 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('create/', views.create, name="create"),
     path('api/v2/', include(router.urls)),                              #http://127.0.0.1:8000/api/v2/todo/
-    # path('api/v2/todolist/', TodoViewSet.as_view({'get': 'list'})),
-    # path('api/v2/todolist/<int:pk>/', TodoViewSet.as_view({'put': 'update'})),
+
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
 
